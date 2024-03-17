@@ -25,7 +25,7 @@
     <title>Falcon Report Graphics</title>
 </svelte:head>
 
-<h1 class="text-center text-3xl font-bold">Graphics Generators</h1>
+<h1 class="text-center text-2xl">Graphics Generators</h1>
 <div class="mx-auto my-10 flex flex-row gap-4 flex-wrap justify-center">
     {#each cards as card}
         <div class="card card-compact w-96 hover:scale-95 transition-all">
