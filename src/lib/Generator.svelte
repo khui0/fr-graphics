@@ -1,32 +1,34 @@
 <script>
+    import Field from "./Field.svelte";
+
     export let title = "Generator";
     export let fields;
 </script>
 
-<div class="flex flex-col items-center">
-    <h2 class="text-center text-2xl">{title}</h2>
+<h2 class="text-center text-2xl">{title}</h2>
+<div class="flex flex-row gap-4 items-start justify-center flex-wrap my-4">
     <canvas
-        class="rounded-box bg-base-200 w-full max-w-xl my-4"
+        class="rounded-box bg-base-200 w-full max-w-xl"
         width="1920"
         height="1080"
     ></canvas>
-    {#each fields as field}
-        <label class="form-control w-full max-w-xl">
-            <div class="label">
-                <span class="label-text">{field.text}</span>
-            </div>
-            {#if field.type === "string"}
-                <input type="text" class="input input-bordered" />
-            {:else if field.type === "date"}
-                <input type="date" class="input input-bordered" />
-            {:else if field.type === "select" && field.options}
-                <select class="select select-bordered">
-                    {#each field.options as option}
-                        <option value={option.value}>{option.text}</option>
-                    {/each}</select
+    <div class="w-full max-w-xl overflow-auto">
+        {#each fields as field}
+            {#if field.type !== "group"}
+                <Field {field}></Field>
+            {:else}
+                <div
+                    class="w-full max-w-xl p-3 border border-neutral rounded-box my-4 first-of-type:mt-0 last-of-type:mb-0"
                 >
+                    {#if field.text}
+                        <p class="text-neutral-content">{field.text}</p>
+                    {/if}
+                    {#each field.fields as field}
+                        <Field {field}></Field>
+                    {/each}
+                </div>
             {/if}
-        </label>
-    {/each}
-    <button class="btn btn-primary my-4">Generate</button>
+        {/each}
+        <button class="btn btn-primary my-4">Generate</button>
+    </div>
 </div>

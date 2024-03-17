@@ -26,7 +26,7 @@ export default {
           "secondary": "#b22323",
           "secondary-content": "white",
           "accent": "#b22323",
-          "neutral": "#3d4451",
+          "neutral": "#3f3f3f",
           "base-100": "#0f0f0f",
           "base-200": "#272727",
           "base-300": "#ababab",

@@ -4,39 +4,95 @@
     let title = "Upcoming Events";
     let fields = [
         {
-            type: "date",
-            text: "Date",
-        },
-        {
-            type: "select",
-            text: "Font Size",
-            options: [
-                { value: 10, text: "1/10" },
-                { value: 9, text: "1/9" },
-                { value: 8, text: "1/8" },
-                { value: 7, text: "1/7" },
-                { value: 6, text: "1/6" },
+            name: "panel1",
+            type: "group",
+            text: "Panel 1",
+            fields: [
+                {
+                    type: "toggle",
+                    text: "Enabled",
+                },
+                {
+                    type: "string",
+                    text: "Details 1",
+                },
+                {
+                    type: "string",
+                    text: "Details 2",
+                },
+                {
+                    type: "string",
+                    text: "Title",
+                },
             ],
         },
         {
-            type: "select",
-            text: "Subtitle Style",
-            options: [
-                { value: 0, text: "Date" },
-                { value: 1, text: "Subtitle" },
-                { value: 2, text: "Date and Subtitle" },
+            name: "panel2",
+            type: "group",
+            text: "Panel 2",
+            fields: [
+                {
+                    type: "toggle",
+                    text: "Enabled",
+                },
+                {
+                    type: "string",
+                    text: "Details 1",
+                },
+                {
+                    type: "string",
+                    text: "Details 2",
+                },
+                {
+                    type: "string",
+                    text: "Title",
+                },
             ],
         },
         {
-            type: "string",
-            text: "Subtitle Text",
+            name: "panel3",
+            type: "group",
+            text: "Panel 3",
+            fields: [
+                {
+                    type: "toggle",
+                    text: "Enabled",
+                },
+                {
+                    type: "string",
+                    text: "Details 1",
+                },
+                {
+                    type: "string",
+                    text: "Details 2",
+                },
+                {
+                    type: "string",
+                    text: "Title",
+                },
+            ],
         },
         {
-            type: "select",
-            text: "Background Style",
-            options: [
-                { value: 0, text: "Default" },
-                { value: 1, text: "Transparent" },
+            name: "panel4",
+            type: "group",
+            text: "Panel 4",
+            fields: [
+                {
+                    type: "toggle",
+                    text: "Enabled",
+                },
+                {
+                    type: "string",
+                    text: "Details 1",
+                },
+                {
+                    type: "string",
+                    text: "Details 2",
+                },
+                {
+                    type: "string",
+                    text: "Title",
+                },
             ],
         },
     ];
