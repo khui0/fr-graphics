@@ -25,19 +25,22 @@
     <title>Falcon Report Graphics</title>
 </svelte:head>
 
-<h1 class="text-center mb-8 text-2xl font-bold">Graphics Generators</h1>
-<div class="mx-auto flex flex-row gap-4 flex-wrap w-fit justify-center">
+<h1 class="text-center text-3xl font-bold">Graphics Generators</h1>
+<div class="mx-auto my-10 flex flex-row gap-4 flex-wrap justify-center">
     {#each cards as card}
         <div class="card card-compact w-96 hover:scale-95 transition-all">
             <a href={card.src}
                 ><figure class="rounded-box">
                     <img src={card.thumbnail} alt={card.title} />
                 </figure>
-                <div class="card-body">
+                <div class="card-body gap-0">
                     <h2 class="card-title">{card.title}</h2>
-                    <p>{card.description}</p>
+                    <p class="text-neutral-content">{card.description}</p>
                 </div>
             </a>
         </div>
     {/each}
+</div>
+<div class="prose text-center mx-auto">
+    <p>Falcon Report internal tools</p>
 </div>

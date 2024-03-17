@@ -12,6 +12,9 @@ export default {
     daisyui,
     Typography(),
   ],
+  future: {
+    hoverOnlyWhenSupported: true
+  },
   daisyui: {
     themes: [
       {

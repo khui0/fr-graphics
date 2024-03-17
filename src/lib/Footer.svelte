@@ -1,7 +1,3 @@
-<script>
-    import TheFalconReport from "./TheFalconReport.svelte";
-</script>
-
 <footer class="footer items-center p-4 text-neutral-content">
     <aside class="items-center grid-flow-col">
         <p>Falcon Report Graphics by Kenny Hui</p>
@@ -12,6 +8,9 @@
         >
         <a class="text-2xl" href="https://www.instagram.com/vssfalconreport"
             ><i class="bi bi-instagram"></i></a
+        >
+        <a class="text-2xl" href="https://github.com/khui0/fr-graphics"
+            ><i class="bi bi-github"></i></a
         >
     </nav>
 </footer>
