@@ -1,4 +1,5 @@
 <script>
+    import { onMount } from "svelte";
     import Generator from "$lib/Generator.svelte";
 
     let title = "Weather";
@@ -62,10 +63,37 @@
             ],
         },
     ];
+
+    let canvas;
+    onMount(() => {
+        const ctx = canvas.getContext("2d");
+        ctx.fillStyle = "lime";
+
+        const start = Date.now();
+        const size = 50;
+        let x = 0;
+        let y = 0;
+
+        function update() {
+            ctx.clearRect(0, 0, 1920, 1080);
+
+            x = (Math.cos((Date.now() - start) / 1000) * 1920) / 2;
+            // y = (Math.sin((Date.now() - start) / 1000) * 1080) / 2;
+            ctx.fillRect(
+                x + (1920 - size) / 2,
+                y + (1080 - size) / 2,
+                size,
+                size,
+            );
+
+            requestAnimationFrame(update);
+        }
+        requestAnimationFrame(update);
+    });
 </script>
 
 <svelte:head>
     <title>{title} - Falcon Report Graphics</title>
 </svelte:head>
 
-<Generator {title} {fields}></Generator>
+<Generator {title} {fields} bind:canvas></Generator>
