@@ -4,39 +4,61 @@
     let title = "Weather";
     let fields = [
         {
-            type: "date",
-            text: "Date",
-        },
-        {
-            type: "select",
-            text: "Font Size",
-            options: [
-                { value: 10, text: "1/10" },
-                { value: 9, text: "1/9" },
-                { value: 8, text: "1/8" },
-                { value: 7, text: "1/7" },
-                { value: 6, text: "1/6" },
-            ],
-        },
-        {
-            type: "select",
-            text: "Subtitle Style",
-            options: [
-                { value: 0, text: "Date" },
-                { value: 1, text: "Subtitle" },
-                { value: 2, text: "Date and Subtitle" },
-            ],
-        },
-        {
+            name: "reporterName",
             type: "string",
-            text: "Subtitle Text",
+            text: "Reporter Name",
         },
         {
+            name: "startDay",
             type: "select",
-            text: "Background Style",
+            text: "Start",
             options: [
-                { value: 0, text: "Default" },
-                { value: 1, text: "Transparent" },
+                { value: 0, text: "Sunday" },
+                { value: 1, text: "Monday" },
+                { value: 2, text: "Tuesday" },
+                { value: 3, text: "Wednesday" },
+                { value: 4, text: "Thursday" },
+                { value: 5, text: "Friday" },
+                { value: 6, text: "Saturday" },
+            ],
+        },
+        {
+            name: "endDay",
+            type: "select",
+            text: "End",
+            options: [
+                { value: 0, text: "Sunday" },
+                { value: 1, text: "Monday" },
+                { value: 2, text: "Tuesday" },
+                { value: 3, text: "Wednesday" },
+                { value: 4, text: "Thursday" },
+                { value: 5, text: "Friday" },
+                { value: 6, text: "Saturday" },
+            ],
+        },
+        {
+            name: "sunday",
+            type: "group",
+            text: "Sunday",
+            fields: [
+                {
+                    name: "temperature",
+                    type: "number",
+                    text: "Temperature",
+                },
+                {
+                    name: "conditions",
+                    type: "select",
+                    text: "Conditions",
+                    options: [
+                        { value: "sunny", text: "Sunny" },
+                        { value: "cloudy", text: "Cloudy" },
+                        { value: "thunder", text: "Thunder" },
+                        { value: "rain", text: "Rain" },
+                        { value: "snow", text: "Snow" },
+                        { value: "partlyCloudy", text: "Partly Cloudy" },
+                    ],
+                },
             ],
         },
     ];

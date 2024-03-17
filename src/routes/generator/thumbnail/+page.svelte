@@ -4,10 +4,12 @@
     let title = "Thumbnail";
     let fields = [
         {
+            name: "date",
             type: "date",
             text: "Date",
         },
         {
+            name: "fontSize",
             type: "select",
             text: "Font Size",
             options: [
@@ -19,6 +21,7 @@
             ],
         },
         {
+            name: "subtitleStyle",
             type: "select",
             text: "Subtitle Style",
             options: [
@@ -28,10 +31,13 @@
             ],
         },
         {
+            name: "subtitleText",
             type: "string",
             text: "Subtitle Text",
+            value: "testing",
         },
         {
+            name: "backgroundStyle",
             type: "select",
             text: "Background Style",
             options: [
@@ -40,6 +46,10 @@
             ],
         },
     ];
+
+    let values;
+    console.log(values);
+    console.log(fields)
 </script>
 
 <svelte:head>
