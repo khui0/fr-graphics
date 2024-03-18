@@ -20,8 +20,7 @@
                         object[field.name][subField.name] = subField.value;
                     }
                 });
-            } else if (field.type === "string") {
-                object[field.name] = "";
+            } else {
                 if (field.value) {
                     object[field.name] = field.value;
                 }
@@ -41,7 +40,7 @@
             height="1080"
         ></canvas>
         <div class="flex flex-row justify-center mt-4">
-            <button class="btn btn-primary">Generate</button>
+            <button class="btn btn-primary" on:click>Generate</button>
         </div>
     </div>
     <div class="w-full max-w-xl">

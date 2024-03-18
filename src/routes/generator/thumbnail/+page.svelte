@@ -1,5 +1,8 @@
 <script>
     import { onMount } from "svelte";
+    import { load, generate } from "./generator.js";
+    import { download, thisFriday, dateToISO } from "$lib/utilities.js";
+
     import Generator from "$lib/Generator.svelte";
 
     let title = "Thumbnail";
@@ -8,6 +11,7 @@
             name: "date",
             type: "date",
             text: "Date",
+            value: dateToISO(thisFriday()),
         },
         {
             name: "fontSize",
@@ -20,6 +24,7 @@
                 { value: 7, text: "1/7" },
                 { value: 6, text: "1/6" },
             ],
+            value: 8,
         },
         {
             name: "subtitleStyle",
@@ -47,17 +52,21 @@
         },
     ];
     let values;
+    let canvas;
     $: values, update();
 
-    let canvas;
     onMount(() => {
+        // Set canvas context once it's rendered
         canvas.ctx = canvas.getContext("2d");
     });
 
     function update() {
+        // Use presence canvas.ctx to determine if canvas is ready
         const ready = Boolean(canvas?.ctx);
         if (!ready) return;
-        console.log(values);
+        load().then((assets) => {
+            canvas.ctx.drawImage(generate(canvas, assets, values), 0, 0);
+        });
     }
 </script>
 
@@ -65,4 +74,10 @@
     <title>{title} - Falcon Report Graphics</title>
 </svelte:head>
 
-<Generator {title} {fields} bind:canvas bind:values></Generator>
+<Generator
+    {title}
+    {fields}
+    bind:canvas
+    bind:values
+    on:click={() => download(canvas, "thumbnail")}
+></Generator>
