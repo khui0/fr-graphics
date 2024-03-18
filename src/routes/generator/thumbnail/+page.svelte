@@ -51,28 +51,6 @@
     let canvas;
     onMount(() => {
         const ctx = canvas.getContext("2d");
-        ctx.fillStyle = "red";
-
-        const start = Date.now();
-        const size = 50;
-        let x = 0;
-        let y = 0;
-
-        function update() {
-            ctx.clearRect(0, 0, 1920, 1080);
-
-            x = Math.cos((Date.now() - start) / 500) * 100;
-            y = Math.sin((Date.now() - start) / 500) * 100;
-            ctx.fillRect(
-                x + (1920 - size) / 2,
-                y + (1080 - size) / 2,
-                size,
-                size,
-            );
-
-            requestAnimationFrame(update);
-        }
-        requestAnimationFrame(update);
     });
 </script>
 
