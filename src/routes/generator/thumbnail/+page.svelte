@@ -35,7 +35,6 @@
             name: "subtitleText",
             type: "string",
             text: "Subtitle Text",
-            value: "testing",
         },
         {
             name: "backgroundStyle",

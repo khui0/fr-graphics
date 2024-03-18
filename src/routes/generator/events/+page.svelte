@@ -13,6 +13,7 @@
                     name: "enabled",
                     type: "toggle",
                     text: "Enabled",
+                    value: true,
                 },
                 {
                     name: "details1",
@@ -40,6 +41,7 @@
                     name: "enabled",
                     type: "toggle",
                     text: "Enabled",
+                    value: true,
                 },
                 {
                     name: "details1",
@@ -67,6 +69,7 @@
                     name: "enabled",
                     type: "toggle",
                     text: "Enabled",
+                    value: true,
                 },
                 {
                     name: "details1",
@@ -94,6 +97,7 @@
                     name: "enabled",
                     type: "toggle",
                     text: "Enabled",
+                    value: true,
                 },
                 {
                     name: "details1",
