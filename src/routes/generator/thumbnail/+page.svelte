@@ -47,15 +47,23 @@
             ],
         },
     ];
+    let values;
+    $: values, update();
 
     let canvas;
     onMount(() => {
-        const ctx = canvas.getContext("2d");
+        canvas.ctx = canvas.getContext("2d");
     });
+
+    function update() {
+        const ready = Boolean(canvas?.ctx);
+        if (!ready) return;
+        console.log(values);
+    }
 </script>
 
 <svelte:head>
     <title>{title} - Falcon Report Graphics</title>
 </svelte:head>
 
-<Generator {title} {fields} bind:canvas></Generator>
+<Generator {title} {fields} bind:canvas bind:values></Generator>

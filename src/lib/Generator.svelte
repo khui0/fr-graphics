@@ -5,19 +5,21 @@
     export let fields;
     export let canvas;
 
+    // Binded values for the inputs
     export let values = createStructure(fields);
 
+    // Analyzes "fields" and assigns appropriate variables to prevent undefined values
     function createStructure(fields) {
         const object = {};
         fields.forEach((field) => {
-            if (field.type == "group") {
+            if (field.type === "group") {
                 object[field.name] = {};
+            } else if (field.type === "string") {
+                object[field.name] = "";
             }
         });
         return object;
     }
-
-    $: console.log(values);
 </script>
 
 <h2 class="text-center text-2xl">{title}</h2>
