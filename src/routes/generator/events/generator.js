@@ -102,14 +102,30 @@ export function generate(canvas, assets, options) {
             ctx.fillText(panel.details2 || "", rect.x + X_MARGIN, Y_CENTER + HEIGHT / 24);
 
             // Title
-            ctx.textAlign = "right";
-            ctx.font = `${(HEIGHT / 12)}px "Montserrat-SemiBold"`;
-            longShadow(ctx, HEIGHT / 100, () => {
-                ctx.fillStyle = SHADOW_COLOR;
-                ctx.fillText(panel.title || "", rect.x + rect.w - X_MARGIN, Y_CENTER);
-            });
-            ctx.fillStyle = "white";
-            ctx.fillText(panel.title || "", rect.x + rect.w - X_MARGIN, Y_CENTER);
+            (() => {
+                const lines = panel.title.split("\\");
+                ctx.textAlign = "right";
+
+                if (lines.length === 1) {
+                    ctx.font = `${(HEIGHT / 12)}px "Montserrat-SemiBold"`;
+                    longShadow(ctx, HEIGHT / 100, () => {
+                        ctx.fillStyle = SHADOW_COLOR;
+                        ctx.fillText(lines[0] || "", rect.x + rect.w - X_MARGIN, Y_CENTER);
+                    });
+                    ctx.fillStyle = "white";
+                    ctx.fillText(lines[0] || "", rect.x + rect.w - X_MARGIN, Y_CENTER);
+                } else {
+                    ctx.font = `${(HEIGHT / 18)}px "Montserrat-SemiBold"`;
+                    longShadow(ctx, HEIGHT / 100, () => {
+                        ctx.fillStyle = SHADOW_COLOR;
+                        ctx.fillText(lines[0] || "", rect.x + rect.w - X_MARGIN, Y_CENTER - HEIGHT / 24);
+                        ctx.fillText(lines[1] || "", rect.x + rect.w - X_MARGIN, Y_CENTER + HEIGHT / 24);
+                    });
+                    ctx.fillStyle = "white";
+                    ctx.fillText(lines[0] || "", rect.x + rect.w - X_MARGIN, Y_CENTER - HEIGHT / 24);
+                    ctx.fillText(lines[1] || "", rect.x + rect.w - X_MARGIN, Y_CENTER + HEIGHT / 24);
+                }
+            })();
         }
     })();
 

@@ -31,7 +31,7 @@
                 {
                     name: "title",
                     type: "string",
-                    text: "Title",
+                    text: "Title (Use a backslash to split into two lines)",
                 },
             ],
         },
