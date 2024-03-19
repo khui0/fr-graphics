@@ -62,7 +62,7 @@ export function generate(canvas, assets, options) {
             const rect = grid[i][0];
             longShadow(temp.ctx, HEIGHT / 100, () => {
                 // Extrude color
-                temp.ctx.fillStyle = "rgb(99, 10, 10)";
+                temp.ctx.fillStyle = SHADOW_COLOR;
                 roundRect(temp.ctx, rect.x, rect.y, rect.w, rect.h, HEIGHT / 48).fill();
             }, false);
             // Top color
@@ -103,9 +103,9 @@ export function generate(canvas, assets, options) {
 
             // Title
             (() => {
-                const lines = panel.title.split("\\");
+                const lines = panel.title?.split("\\");
                 ctx.textAlign = "right";
-
+                if (!lines) return;
                 if (lines.length === 1) {
                     ctx.font = `${(HEIGHT / 12)}px "Montserrat-SemiBold"`;
                     longShadow(ctx, HEIGHT / 100, () => {
