@@ -1,4 +1,6 @@
 <script>
+    import { base } from "$app/paths";
+
     const ver = __APP_VERSION__;
 
     let cards = [
@@ -6,19 +8,19 @@
             title: "Thumbnail",
             description: "Easy as pie!",
             thumbnail: "./thumbnail.png",
-            src: "/generator/thumbnail",
+            src: `${base}/generator/thumbnail`,
         },
         {
             title: "Upcoming Events",
             description: "What's going on?",
             thumbnail: "./events.png",
-            src: "/generator/events",
+            src: `${base}/generator/events`,
         },
         {
             title: "Weather",
             description: "It's raining cats and dogs!",
             thumbnail: "./weather.png",
-            src: "/generator/weather",
+            src: `${base}/generator/weather`,
         },
     ];
 </script>
