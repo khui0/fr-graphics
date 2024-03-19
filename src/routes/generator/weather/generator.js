@@ -121,10 +121,12 @@ export function generate(canvas, assets, options) {
                 const index = i * 5 + j;
                 if (index >= options.days) break;
 
+                const data = options[`day${index}`];
+
                 const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
                 const day = days[(index + options.startDay) % days.length];
-                const temp = 60 + "°";
-                const icon = assets["rain"];
+                const temp = data.temperature + "°";
+                const icon = assets[data.conditions];
                 const iconSize = rows > 1 ? rect.h * 0.5 : Math.min(rect.w * 0.8, rect.h * 0.7);
 
                 const X_CENTER = rect.x + rect.w / 2;
@@ -133,28 +135,30 @@ export function generate(canvas, assets, options) {
                 // Day of the week
                 ctx.textAlign = "center";
                 ctx.font = `${(HEIGHT / 18)}px "Montserrat-SemiBold"`;
+                ctx.textBaseline = "top";
                 longShadow(ctx, HEIGHT / 100, () => {
                     ctx.fillStyle = SHADOW_COLOR;
-                    ctx.fillText(day, X_CENTER, rect.y + HEIGHT * 0.04);
+                    ctx.fillText(day, X_CENTER, rect.y + rect.h * 0.04);
                 });
                 ctx.fillStyle = "white";
-                ctx.fillText(day, X_CENTER, rect.y + HEIGHT * 0.04);
+                ctx.fillText(day, X_CENTER, rect.y + rect.h * 0.04);
 
                 // Temperature
                 ctx.font = `${(HEIGHT / 8)}px "Montserrat-SemiBold"`;
+                ctx.textBaseline = "bottom";
                 longShadow(ctx, HEIGHT / 100, () => {
                     ctx.fillStyle = SHADOW_COLOR;
-                    ctx.fillText(temp, X_CENTER, rect.y + rect.h - HEIGHT * 0.07);
+                    ctx.fillText(temp, X_CENTER, rect.y + rect.h - rect.h * 0.04);
                 });
                 ctx.fillStyle = "white";
-                ctx.fillText(temp, X_CENTER, rect.y + rect.h - HEIGHT * 0.07);
+                ctx.fillText(temp, X_CENTER, rect.y + rect.h - rect.h * 0.04);
 
                 // Icon
                 ctx.shadowColor = "rgba(0, 0, 10, 0.5)";
-                ctx.shadowBlur = HEIGHT / 100 * 2;
+                ctx.shadowBlur = HEIGHT / 100 * 4;
                 ctx.shadowOffsetX = HEIGHT / 100 * 0.8;
                 ctx.shadowOffsetY = HEIGHT / 100 * 0.8;
-                ctx.drawImage(icon, X_CENTER - iconSize / 2, Y_CENTER - iconSize / 2 - rect.h * 0.05, iconSize, iconSize);
+                ctx.drawImage(icon, X_CENTER - iconSize / 2, Y_CENTER - iconSize / 2 - rect.h * 0.06, iconSize, iconSize);
                 ctx.shadowColor = "transparent";
             }
         }

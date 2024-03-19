@@ -41,31 +41,34 @@
             ],
             value: 5,
         },
-        // {
-        //     name: "sunday",
-        //     type: "group",
-        //     text: "Sunday",
-        //     fields: [
-        //         {
-        //             name: "temperature",
-        //             type: "number",
-        //             text: "Temperature",
-        //         },
-        //         {
-        //             name: "conditions",
-        //             type: "select",
-        //             text: "Conditions",
-        //             options: [
-        //                 { value: "sunny", text: "Sunny" },
-        //                 { value: "cloudy", text: "Cloudy" },
-        //                 { value: "thunder", text: "Thunder" },
-        //                 { value: "rain", text: "Rain" },
-        //                 { value: "snow", text: "Snow" },
-        //                 { value: "partlyCloudy", text: "Partly Cloudy" },
-        //             ],
-        //         },
-        //     ],
-        // },
+        ...Array.from(Array(10)).map((_, i) => {
+            return {
+                name: `day${i}`,
+                type: "group",
+                text: `Day ${i + 1}`,
+                fields: [
+                    {
+                        name: "conditions",
+                        type: "select",
+                        text: "Conditions",
+                        options: [
+                            { value: "sunny", text: "Sunny" },
+                            { value: "cloudy", text: "Cloudy" },
+                            { value: "thunder", text: "Thunder" },
+                            { value: "rain", text: "Rain" },
+                            { value: "snow", text: "Snow" },
+                            { value: "partlyCloudy", text: "Partly Cloudy" },
+                        ],
+                    },
+                    {
+                        name: "temperature",
+                        type: "number",
+                        text: "Temperature",
+                        value: 60,
+                    },
+                ],
+            };
+        }),
     ];
     let values;
     let canvas;
