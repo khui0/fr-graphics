@@ -1,5 +1,8 @@
 <script>
     import { onMount } from "svelte";
+    import { load, generate } from "./generator.js";
+    import { download } from "$lib/utilities.js";
+
     import Generator from "$lib/Generator.svelte";
 
     let title = "Upcoming Events";
@@ -118,17 +121,21 @@
         },
     ];
     let values;
+    let canvas;
     $: values, update();
 
-    let canvas;
     onMount(() => {
+        // Set canvas context once it's rendered
         canvas.ctx = canvas.getContext("2d");
     });
 
     function update() {
+        // Use presence canvas.ctx to determine if canvas is ready
         const ready = Boolean(canvas?.ctx);
         if (!ready) return;
-        console.log(values);
+        load().then((assets) => {
+            canvas.ctx.drawImage(generate(canvas, assets, values), 0, 0);
+        });
     }
 </script>
 
@@ -136,4 +143,10 @@
     <title>{title} - Falcon Report Graphics</title>
 </svelte:head>
 
-<Generator {title} {fields} bind:canvas></Generator>
+<Generator
+    {title}
+    {fields}
+    bind:canvas
+    bind:values
+    on:click={() => download(canvas, "events")}
+></Generator>

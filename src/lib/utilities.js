@@ -70,3 +70,22 @@ export function roundRect(ctx, x, y, w, h, r) {
     ctx.closePath();
     return ctx;
 }
+
+export function createGrid(x1, y1, x2, y2, rows, cols, gap = 0, margin = 0) {
+    const grid = [];
+    const itemWidth = (x2 - x1 - (margin * 2) - ((cols - 1) * gap)) / cols;
+    const itemHeight = (y2 - y1 - (margin * 2) - ((rows - 1) * gap)) / rows;
+    for (let y = 0; y < rows; y++) {
+        const row = [];
+        for (let x = 0; x < cols; x++) {
+            row.push({
+                x: (itemWidth + gap) * x + x1 + margin,
+                y: (itemHeight + gap) * y + y1 + margin,
+                w: itemWidth,
+                h: itemHeight,
+            });
+        }
+        grid.push(row);
+    }
+    return grid;
+}
