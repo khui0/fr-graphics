@@ -72,7 +72,6 @@
         load().then((assets) => {
             canvas.ctx.drawImage(generate(canvas, assets, values), 0, 0);
         });
-        console.log(values);
     }
 
     async function applyFile(e) {
