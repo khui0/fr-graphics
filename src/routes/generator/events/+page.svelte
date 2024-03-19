@@ -1,7 +1,7 @@
 <script>
     import { onMount } from "svelte";
     import { load, generate } from "./generator.js";
-    import { download, dateToISO } from "$lib/utilities.js";
+    import { download, downloadText, dateToISO } from "$lib/utilities.js";
 
     import Generator from "$lib/Generator.svelte";
 
@@ -137,6 +137,13 @@
             canvas.ctx.drawImage(generate(canvas, assets, values), 0, 0);
         });
     }
+
+    async function applyFile(e) {
+        const text = await e.target.files[0].text();
+        const json = JSON.parse(text);
+        Object.assign(values, json);
+        update();
+    }
 </script>
 
 <svelte:head>
@@ -149,4 +156,18 @@
         on:click={() => download(canvas, `events-${dateToISO(new Date())}`)}
         >Generate</button
     >
+    <button
+        class="btn"
+        on:click={() =>
+            downloadText(
+                JSON.stringify(values),
+                `events-${dateToISO(new Date())}.json`,
+            )}>JSON</button
+    >
+    <input
+        type="file"
+        class="file-input file-input-ghost w-full max-w-xs"
+        accept="application/json"
+        on:change={applyFile}
+    />
 </Generator>

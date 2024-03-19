@@ -38,7 +38,7 @@
             width="1920"
             height="1080"
         ></canvas>
-        <div class="flex flex-row justify-center mt-4 gap-2">
+        <div class="flex flex-row justify-center mt-4 gap-2 flex-wrap">
             <slot />
         </div>
     </div>

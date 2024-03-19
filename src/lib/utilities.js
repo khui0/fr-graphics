@@ -39,6 +39,13 @@ export function download(canvas, fileName) {
     link.click();
 }
 
+export function downloadText(string, fileName) {
+    const link = document.createElement("a");
+    link.download = fileName;
+    link.href = "data:text/plain;charset=utf-8," + encodeURIComponent(string);
+    link.click();
+}
+
 export function longShadow(ctx, depth, callback, shadow = true) {
     ctx.save();
     ctx.translate(depth, depth);
