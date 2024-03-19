@@ -38,3 +38,35 @@ export function download(canvas, fileName) {
     link.href = canvas.toDataURL();
     link.click();
 }
+
+export function longShadow(ctx, depth, callback, shadow = true) {
+    ctx.save();
+    ctx.translate(depth, depth);
+    for (let i = 1; i < depth; i++) {
+        if (i == 1 && shadow) {
+            ctx.shadowColor = "rgba(0, 0, 10, 0.5)";
+            ctx.shadowBlur = depth * 1.4;
+            ctx.shadowOffsetX = depth * 0.8;
+            ctx.shadowOffsetY = depth * 0.8;
+        }
+        else {
+            ctx.shadowColor = "transparent";
+        }
+        ctx.translate(-1, -1);
+        callback();
+    }
+    ctx.restore();
+}
+
+export function roundRect(ctx, x, y, w, h, r) {
+    if (w < 2 * r) r = w / 2;
+    if (h < 2 * r) r = h / 2;
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+    return ctx;
+}

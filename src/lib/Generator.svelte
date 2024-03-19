@@ -15,7 +15,6 @@
             if (field.type === "group") {
                 object[field.name] = {};
                 field.fields.forEach((subField) => {
-                    console.log(subField);
                     if (subField.value) {
                         object[field.name][subField.name] = subField.value;
                     }

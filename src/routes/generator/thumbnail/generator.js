@@ -1,4 +1,4 @@
-import { loadImage, setSVGStyle, dateToString } from "$lib/utilities.js";
+import { loadImage, setSVGStyle, dateToString, longShadow } from "$lib/utilities.js";
 
 import falcon from "$lib/assets/falcon.svg";
 import logo from "$lib/assets/falcon-report-logo-v2-with-padding-01.svg?raw";
@@ -124,23 +124,4 @@ export function generate(canvas, assets, options) {
     })();
 
     return canvas;
-}
-
-function longShadow(ctx, depth, callback) {
-    ctx.save();
-    ctx.translate(depth, depth);
-    for (let i = 1; i < depth; i++) {
-        if (i == 1) {
-            ctx.shadowColor = "rgba(0, 0, 10, 0.5)";
-            ctx.shadowBlur = 50;
-            ctx.shadowOffsetX = 30;
-            ctx.shadowOffsetY = 30;
-        }
-        else {
-            ctx.shadowColor = "transparent";
-        }
-        ctx.translate(-1, -1);
-        callback();
-    }
-    ctx.restore();
 }
