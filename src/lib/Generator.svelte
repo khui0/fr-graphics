@@ -38,8 +38,8 @@
             width="1920"
             height="1080"
         ></canvas>
-        <div class="flex flex-row justify-center mt-4">
-            <button class="btn btn-primary" on:click>Generate</button>
+        <div class="flex flex-row justify-center mt-4 gap-2">
+            <slot />
         </div>
     </div>
     <div class="w-full max-w-xl">

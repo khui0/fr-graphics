@@ -74,10 +74,9 @@
     <title>{title} - Falcon Report Graphics</title>
 </svelte:head>
 
-<Generator
-    {title}
-    {fields}
-    bind:canvas
-    bind:values
-    on:click={() => download(canvas, "thumbnail")}
-></Generator>
+<Generator {title} {fields} bind:canvas bind:values>
+    <button
+        class="btn btn-primary"
+        on:click={() => download(canvas, "thumbnail")}>Generate</button
+    >
+</Generator>
