@@ -37,13 +37,13 @@ export function generate(canvas, assets, options) {
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.fillStyle = "white";
-        ctx.font = `700 ${(HEIGHT / 7.5)}px "LinLibertineCapitalsB"`;
+        ctx.font = `${(HEIGHT / 10)}px "LinLibertineCapitalsB"`;
         longShadow(ctx, HEIGHT / 80, () => {
             ctx.fillStyle = SHADOW_COLOR;
-            ctx.fillText("Upcoming Events", WIDTH * 0.5, HEIGHT * 0.1);
+            ctx.fillText("Upcoming Events", WIDTH * 0.5, HEIGHT * 0.075);
         });
         ctx.fillStyle = "white";
-        ctx.fillText("Upcoming Events", WIDTH * 0.5, HEIGHT * 0.1);
+        ctx.fillText("Upcoming Events", WIDTH * 0.5, HEIGHT * 0.075);
     })();
 
     // Panels
@@ -55,12 +55,11 @@ export function generate(canvas, assets, options) {
 
         const panels = Object.values(options).filter(panel => panel.enabled === true);
         // x1, y1, x2, y2, rows, cols, gap, margin
-        const grid = createGrid(0, HEIGHT * 0.175, WIDTH, HEIGHT, panels.length, 1, HEIGHT / 64, HEIGHT / 36);
+        const grid = createGrid(0, HEIGHT * 0.125, WIDTH, HEIGHT, panels.length, 1, HEIGHT / 48, HEIGHT / 48);
 
         // Loop over panels
         for (let i = 0; i < panels.length; i++) {
             const rect = grid[i][0];
-            console.log(rect);
             longShadow(temp.ctx, HEIGHT / 100, () => {
                 // Extrude color
                 temp.ctx.fillStyle = "rgb(99, 10, 10)";
@@ -75,7 +74,7 @@ export function generate(canvas, assets, options) {
         ctx.globalAlpha = 0.5;
         ctx.drawImage(temp, 0, 0);
         ctx.globalAlpha = 1;
-    })()
+    })();
 
     return canvas;
 }

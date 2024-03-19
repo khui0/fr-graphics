@@ -84,7 +84,7 @@ export function generate(canvas, assets, options) {
 
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
-        ctx.font = `600 ${(HEIGHT / options.fontSize)}px "Montserrat-SemiBold"`;
+        ctx.font = `${(HEIGHT / options.fontSize)}px "Montserrat-SemiBold"`;
         switch (options.subtitleStyle) {
             case 0: {
                 const x = WIDTH * 0.5;
