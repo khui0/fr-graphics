@@ -48,31 +48,31 @@
             ],
             value: 0,
         },
-        {
-            name: "sunday",
-            type: "group",
-            text: "Sunday",
-            fields: [
-                {
-                    name: "temperature",
-                    type: "number",
-                    text: "Temperature",
-                },
-                {
-                    name: "conditions",
-                    type: "select",
-                    text: "Conditions",
-                    options: [
-                        { value: "sunny", text: "Sunny" },
-                        { value: "cloudy", text: "Cloudy" },
-                        { value: "thunder", text: "Thunder" },
-                        { value: "rain", text: "Rain" },
-                        { value: "snow", text: "Snow" },
-                        { value: "partlyCloudy", text: "Partly Cloudy" },
-                    ],
-                },
-            ],
-        },
+        // {
+        //     name: "sunday",
+        //     type: "group",
+        //     text: "Sunday",
+        //     fields: [
+        //         {
+        //             name: "temperature",
+        //             type: "number",
+        //             text: "Temperature",
+        //         },
+        //         {
+        //             name: "conditions",
+        //             type: "select",
+        //             text: "Conditions",
+        //             options: [
+        //                 { value: "sunny", text: "Sunny" },
+        //                 { value: "cloudy", text: "Cloudy" },
+        //                 { value: "thunder", text: "Thunder" },
+        //                 { value: "rain", text: "Rain" },
+        //                 { value: "snow", text: "Snow" },
+        //                 { value: "partlyCloudy", text: "Partly Cloudy" },
+        //             ],
+        //         },
+        //     ],
+        // },
     ];
     let values;
     let canvas;
