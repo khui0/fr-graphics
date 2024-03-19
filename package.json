@@ -28,5 +28,8 @@
     "type": "module",
     "dependencies": {
         "bootstrap-icons": "^1.11.3"
+    },
+    "optionalDependencies": {
+        "@rollup/rollup-linux-x64-gnu": "^4.9.6"
     }
 }
