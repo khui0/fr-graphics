@@ -61,7 +61,6 @@ export function generate(canvas, assets, options) {
         temp.height = HEIGHT;
         temp.ctx = temp.getContext("2d");
 
-        const panels = Object.values(options).filter(panel => panel.enabled === true);
         // x1, y1, x2, y2, rows, cols, gap, margin
         const grid = createGrid(0, HEIGHT * 0.125, WIDTH, HEIGHT, 1, 3, HEIGHT / 48, HEIGHT / 48);
 
@@ -82,43 +81,6 @@ export function generate(canvas, assets, options) {
         ctx.globalAlpha = 0.5;
         ctx.drawImage(temp, 0, 0);
         ctx.globalAlpha = 1;
-
-        // Draw text
-
-        for (let i = 0; i < panels.length; i++) {
-            const panel = panels[i];
-            const rect = grid[i][0];
-            const X_MARGIN = HEIGHT / 36;
-            const Y_CENTER = rect.y + rect.h / 2;
-
-            // Details 1
-            ctx.textAlign = "left";
-            ctx.font = `${(HEIGHT / 18)}px "Montserrat-SemiBold"`;
-            longShadow(ctx, HEIGHT / 100, () => {
-                ctx.fillStyle = SHADOW_COLOR;
-                ctx.fillText(panel.details1 || "", rect.x + X_MARGIN, Y_CENTER - HEIGHT / 24);
-            });
-            ctx.fillStyle = "white";
-            ctx.fillText(panel.details1 || "", rect.x + X_MARGIN, Y_CENTER - HEIGHT / 24);
-
-            // Details 2
-            longShadow(ctx, HEIGHT / 100, () => {
-                ctx.fillStyle = SHADOW_COLOR;
-                ctx.fillText(panel.details2 || "", rect.x + X_MARGIN, Y_CENTER + HEIGHT / 24);
-            });
-            ctx.fillStyle = "white";
-            ctx.fillText(panel.details2 || "", rect.x + X_MARGIN, Y_CENTER + HEIGHT / 24);
-
-            // Title
-            ctx.textAlign = "right";
-            ctx.font = `${(HEIGHT / 12)}px "Montserrat-SemiBold"`;
-            longShadow(ctx, HEIGHT / 100, () => {
-                ctx.fillStyle = SHADOW_COLOR;
-                ctx.fillText(panel.title || "", rect.x + rect.w - X_MARGIN, Y_CENTER);
-            });
-            ctx.fillStyle = "white";
-            ctx.fillText(panel.title || "", rect.x + rect.w - X_MARGIN, Y_CENTER);
-        }
     })();
 
     return canvas;
