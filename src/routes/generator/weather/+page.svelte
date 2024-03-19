@@ -1,7 +1,7 @@
 <script>
     import { onMount } from "svelte";
     import { load, generate } from "./generator.js";
-    import { download } from "$lib/utilities.js";
+    import { download, dateToISO } from "$lib/utilities.js";
 
     import Generator from "$lib/Generator.svelte";
 
@@ -94,7 +94,9 @@
 </svelte:head>
 
 <Generator {title} {fields} bind:canvas bind:values>
-    <button class="btn btn-primary" on:click={() => download(canvas, "weather")}
+    <button
+        class="btn btn-primary"
+        on:click={() => download(canvas, `weather-${dateToISO(new Date())}`)}
         >Generate</button
     >
 </Generator>

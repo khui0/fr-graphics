@@ -77,6 +77,7 @@
 <Generator {title} {fields} bind:canvas bind:values>
     <button
         class="btn btn-primary"
-        on:click={() => download(canvas, "thumbnail")}>Generate</button
+        on:click={() => download(canvas, `thumbnail-${values.date}`)}
+        >Generate</button
     >
 </Generator>
