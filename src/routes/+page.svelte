@@ -1,4 +1,6 @@
 <script>
+    const ver = __APP_VERSION__;
+
     let cards = [
         {
             title: "Thumbnail",
@@ -42,5 +44,5 @@
     {/each}
 </div>
 <div class="prose text-center mx-auto">
-    <p>Falcon Report internal tools</p>
+    <p>Falcon Report internal tools {ver}</p>
 </div>

@@ -6,5 +6,8 @@ export default defineConfig({
     plugins: [
         sveltekit(),
         webfontDownload(),
-    ]
+    ],
+    define: {
+        __APP_VERSION__: JSON.stringify(process.env.npm_package_version),
+    },
 });
