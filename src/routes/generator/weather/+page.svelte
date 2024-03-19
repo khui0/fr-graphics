@@ -19,6 +19,14 @@
             value: "Weekend",
         },
         {
+            name: "days",
+            type: "range",
+            text: "Days",
+            min: 1,
+            max: 10,
+            value: 3,
+        },
+        {
             name: "startDay",
             type: "select",
             text: "Start",
@@ -32,21 +40,6 @@
                 { value: 6, text: "Saturday" },
             ],
             value: 5,
-        },
-        {
-            name: "endDay",
-            type: "select",
-            text: "End",
-            options: [
-                { value: 0, text: "Sunday" },
-                { value: 1, text: "Monday" },
-                { value: 2, text: "Tuesday" },
-                { value: 3, text: "Wednesday" },
-                { value: 4, text: "Thursday" },
-                { value: 5, text: "Friday" },
-                { value: 6, text: "Saturday" },
-            ],
-            value: 0,
         },
         // {
         //     name: "sunday",
