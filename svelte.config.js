@@ -8,8 +8,11 @@ export default {
       assets: "build",
       fallback: undefined,
       precompress: false,
-      strict: true
+      strict: true,
     })
   },
-  preprocess: vitePreprocess()
+  paths: {
+    base: process.argv.includes("dev") ? "" : process.env.BASE_PATH,
+  },
+  preprocess: vitePreprocess(),
 };
