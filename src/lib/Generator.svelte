@@ -31,7 +31,7 @@
 
 <h2 class="text-center text-2xl">{title}</h2>
 <div class="flex flex-row gap-4 items-start justify-center flex-wrap my-4">
-    <div class="w-full max-w-xl">
+    <div class="w-full max-w-2xl">
         <canvas
             bind:this={canvas}
             class="rounded-box bg-base-200 w-full"
