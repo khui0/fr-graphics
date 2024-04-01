@@ -84,10 +84,10 @@
         const ready = Boolean(canvas?.ctx);
         if (!ready) return;
         load().then((assets) => {
-            canvas.ctx.drawImage(generate(canvas, assets, values), 0, 0);
+            generate(canvas, assets, values);
         });
     }
-    
+
     async function applyFile(e) {
         const text = await e.target.files[0].text();
         const json = JSON.parse(text);
