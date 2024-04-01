@@ -93,7 +93,8 @@ export function download(options) {
         }
 
         const image = falcos.generate(story.title, nominees).toDataURL().replace("data:image/png;base64,", "");
-        zip.file(sanitize(`${index}-${story.title}`) + ".png", image, { base64: true });
+        // index-portion-title
+        zip.file(sanitize(`${index}-${story.portion}-${story.title}`) + ".png", image, { base64: true });
     }
 
     zip.generateAsync({ type: "blob" }).then(content => {
@@ -122,6 +123,7 @@ function parseCSV(raw) {
             return {
                 title: row[columnToIndex("D")].trim(),
                 nominees: nominees,
+                portion: row[columnToIndex("C")].trim(),
             };
         });
         return formatted;
