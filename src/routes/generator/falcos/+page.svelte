@@ -1,6 +1,6 @@
 <script>
     import { onMount } from "svelte";
-    import { load, generate, download } from "./generator.js";
+    import { load, generate, download, parseCSV } from "./generator.js";
 
     import Generator from "$lib/Generator.svelte";
 
@@ -33,6 +33,7 @@
     let canvas;
     $: values, update();
 
+    let stories;
     let previewIndex = 0;
 
     $: previewIndex, update();
@@ -45,6 +46,9 @@
     function update() {
         const ready = Boolean(canvas?.ctx);
         if (!ready) return;
+        if (values.file) {
+            stories = parseCSV(values.file);
+        }
         load().then((assets) => {
             canvas.ctx.drawImage(
                 generate(canvas, assets, {

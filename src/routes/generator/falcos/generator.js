@@ -37,12 +37,12 @@ export function generate(canvas, assets, options) {
     // Do not continue if data is not parsed
     if (!data) return canvas;
 
-    const indexes = parseRange(options.rows || "");
+    const indices = parseRange(options.rows || "");
 
     let index;
-    if (indexes && indexes.length > 0) {
-        options.previewIndex = clamp(options.previewIndex, 0, indexes.length - 1)
-        index = indexes[options.previewIndex];
+    if (indices && indices.length > 0) {
+        options.previewIndex = clamp(options.previewIndex, 0, indices.length - 1)
+        index = indices[options.previewIndex];
 
     } else {
         options.previewIndex = clamp(options.previewIndex, 0, data.length - 1)
@@ -72,16 +72,16 @@ export function download(options) {
     // Do not continue if data is not parsed
     if (!data) return;
 
-    let indexes = parseRange(options.rows || "");
+    let indices = parseRange(options.rows || "");
 
-    // Populate indexes if no range is provided
-    if (indexes.length == 0) {
-        indexes = parseRange(`0-${data.length - 1}`);
+    // Populate indices if no range is provided
+    if (indices.length == 0) {
+        indices = parseRange(`0-${data.length - 1}`);
     }
 
     // Loop through indices
-    for (let i = 0; i < indexes.length; i++) {
-        const index = indexes[i];
+    for (let i = 0; i < indices.length; i++) {
+        const index = indices[i];
         const story = data[index];
 
         // Format nominees
@@ -102,7 +102,7 @@ export function download(options) {
     });
 }
 
-function parseCSV(raw) {
+export function parseCSV(raw) {
     try {
         // Split CSV into two-dimensional array
         let array = raw.split("\n");
