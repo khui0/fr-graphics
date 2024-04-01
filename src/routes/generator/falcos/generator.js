@@ -112,7 +112,7 @@ function parseCSV(raw) {
         array.shift();
         // Isolate the story title and nominee names
         let formatted = array.map(row => {
-            const nomineeOrder = "NOPQSTUVWXHIJKLF".split("").map(letter => columnToIndex(letter));
+            const nomineeOrder = "NOPQRSTUVWXHIJKLMF".split("").map(letter => columnToIndex(letter));
             const nominees = [];
             nomineeOrder.forEach(index => {
                 if (row[index]) {
