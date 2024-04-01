@@ -22,12 +22,6 @@
             thumbnail: "./weather.png",
             src: `${base}/generator/weather`,
         },
-        {
-            title: "Falcos",
-            description: "",
-            thumbnail: "./weather.png",
-            src: `${base}/generator/falcos`,
-        },
     ];
 </script>
 
