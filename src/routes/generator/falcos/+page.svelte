@@ -1,7 +1,7 @@
 <script>
     import { onMount } from "svelte";
     import { load, generate, download, parseCSV } from "./generator.js";
-    import { clamp, parseRange } from "$lib/utilities.js";
+    import { clamp, parseRange, canonicalToArray } from "$lib/utilities.js";
 
     import Generator from "$lib/Generator.svelte";
 
@@ -25,6 +25,11 @@
             ],
         },
         {
+            name: "useCanonicalRows",
+            type: "toggle",
+            text: "Use spreadsheet rows",
+        },
+        {
             name: "rows",
             type: "string",
             text: "Rows",
@@ -46,28 +51,35 @@
     });
 
     function update() {
-        const ready = Boolean(canvas?.ctx);
-        if (!ready || !values.file) return;
+        try {
+            const ready = Boolean(canvas?.ctx);
+            if (!ready || !values.file) return;
 
-        const data = parseCSV(values.file);
-        if (!data) return;
+            const data = parseCSV(values.file);
+            if (!data) return;
 
-        const indices = parseRange(values.rows || "");
+            let indices = parseRange(values.rows || "");
+            if (values.useCanonicalRows) {
+                indices = indices
+                    .map((value) => canonicalToArray(data, value))
+                    .filter((value) => value !== -1);
+            }
 
-        let index;
-        if (indices && indices.length > 0) {
-            previewIndex = clamp(previewIndex, 0, indices.length - 1);
-            index = indices[previewIndex];
-        } else {
-            previewIndex = clamp(previewIndex, 0, data.length - 1);
-            index = previewIndex;
-        }
-        const story = data[index];
-        previewDetails = `${story.canonical} - ${story.portion} - ${story.title}`;
+            let index;
+            if (indices && indices.length > 0) {
+                previewIndex = clamp(previewIndex, 0, indices.length - 1);
+                index = indices[previewIndex];
+            } else {
+                previewIndex = clamp(previewIndex, 0, data.length - 1);
+                index = previewIndex;
+            }
+            const story = data[index];
+            previewDetails = `${story.canonical} - ${story.portion} - ${story.title}`;
 
-        load().then(() => {
-            generate(canvas.ctx, story, values);
-        });
+            load().then(() => {
+                generate(canvas.ctx, story, values);
+            });
+        } catch (e) {}
     }
 </script>
 

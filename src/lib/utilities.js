@@ -151,3 +151,11 @@ export function parseRange(string) {
     });
     return indexes;
 }
+
+export function canonicalToArray(data, canonical) {
+    return data.findIndex(story => story.canonical === canonical);
+}
+
+export function arrayToCanonical(data, index) {
+    return data[index].canonical;
+}
