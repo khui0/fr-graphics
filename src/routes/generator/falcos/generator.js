@@ -94,7 +94,7 @@ export function download(options) {
 
         const image = falcos.generate(story.title, nominees).toDataURL().replace("data:image/png;base64,", "");
         // index-portion-title
-        zip.file(sanitize(`${index}-${story.portion}-${story.title}`) + ".png", image, { base64: true });
+        zip.file(sanitize(`${story.canonical}-${story.portion}-${story.title}`) + ".png", image, { base64: true });
     }
 
     zip.generateAsync({ type: "blob" }).then(content => {
@@ -107,12 +107,10 @@ function parseCSV(raw) {
         // Split CSV into two-dimensional array
         let array = raw.split("\n");
         array = array.map(row => row.split(","));
-        // Remove rows that do not have a story title
-        array = array.filter(row => row[columnToIndex("D")]?.trim());
         // Remove the first row
         array.shift();
         // Isolate the story title and nominee names
-        let formatted = array.map(row => {
+        let formatted = array.map((row, i) => {
             const nomineeOrder = "NOPQRSTUVWXHIJKLMF".split("").map(letter => columnToIndex(letter));
             const nominees = [];
             nomineeOrder.forEach(index => {
@@ -121,11 +119,14 @@ function parseCSV(raw) {
                 }
             });
             return {
-                title: row[columnToIndex("D")].trim(),
+                title: row[columnToIndex("D")].trim() || "Untitled " + row[columnToIndex("C")].trim(),
                 nominees: nominees,
                 portion: row[columnToIndex("C")].trim(),
+                canonical: i + 2,
             };
         });
+        // Remove rows that are missing either nominees or portion
+        formatted = formatted.filter(story => story.nominees.length > 0 && story.portion);
         return formatted;
     } catch (err) {
         console.error(err);
