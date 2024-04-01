@@ -18,9 +18,10 @@
             type: "select",
             text: "Names",
             options: [
-                { value: 0, text: "Full" },
-                { value: 1, text: "Initialed First" },
-                { value: 2, text: "Initialed Last" },
+                { value: 0, text: "Auto" },
+                { value: 1, text: "Full" },
+                { value: 2, text: "Initialed First" },
+                { value: 3, text: "Initialed Last" },
             ],
         },
         {

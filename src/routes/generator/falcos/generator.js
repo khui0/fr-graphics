@@ -32,9 +32,13 @@ export function generate(ctx, story, options) {
 
     // Format nominees
     let nominees = story.nominees;
-    if (options.nameStyle === 1) {
-        nominees = story.nominees.map(item => initialFirst(item));
+    if (options.nameStyle === 0) {
+        if (nominees.length > 5) {
+            nominees = story.nominees.map(item => initialFirst(item));
+        }
     } else if (options.nameStyle === 2) {
+        nominees = story.nominees.map(item => initialFirst(item));
+    } else if (options.nameStyle === 3) {
         nominees = story.nominees.map(item => initialLast(item));
     }
 
