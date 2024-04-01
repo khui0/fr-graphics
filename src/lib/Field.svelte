@@ -63,14 +63,14 @@
         {#if field.accept}
             <input
                 type="file"
-                class="file-input file-input-bordered w-full max-w-xs"
+                class="file-input file-input-bordered w-full"
                 accept={field.accept}
                 on:change={parseText}
             />
         {:else}
             <input
                 type="file"
-                class="file-input file-input-bordered w-full max-w-xs"
+                class="file-input file-input-bordered w-full"
                 on:change={parseText}
             />
         {/if}
