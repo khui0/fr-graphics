@@ -6,6 +6,7 @@ import saveAs from "file-saver";
 import sanitize from "sanitize-filename";
 
 import montserrat from "$lib/assets/Montserrat-SemiBold.woff2";
+import montserrat700 from "$lib/assets/Montserrat-Bold.woff2";
 import linlibertine from "$lib/assets/LinLibertineCapitalsB.woff2";
 
 const WIDTH = 1920;
@@ -17,6 +18,9 @@ export async function load() {
     const assets = {};
     const promises = [
         new FontFace("Montserrat-SemiBold", `url("${montserrat}")`).load().then(font => {
+            document.fonts.add(font);
+        }),
+        new FontFace("Montserrat-Bold", `url("${montserrat700}")`).load().then(font => {
             document.fonts.add(font);
         }),
         new FontFace("LinLibertineCapitalsB", `url("${linlibertine}")`).load().then(font => {

@@ -61,7 +61,7 @@ export class Falcos {
         // Draw title
         {
             const fontSize = this.h / 6;
-            ctx.font = `${fontSize}px Montserrat-SemiBold`;
+            ctx.font = `${fontSize}px Montserrat-Bold`;
             // Split text into lines
             const lines = this.#getLines(title, this.w - (theme.margin * 2));
             const y = this.h * 0.4;
