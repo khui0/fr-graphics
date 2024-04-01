@@ -1,7 +1,7 @@
 <script>
     import { onMount } from "svelte";
     import { load, generate, download, parseCSV } from "./generator.js";
-    import { clamp } from "$lib/utilities.js";
+    import { clamp, parseRange } from "$lib/utilities.js";
 
     import Generator from "$lib/Generator.svelte";
 
@@ -34,7 +34,7 @@
     let canvas;
     $: values, update();
 
-    let story;
+    let previewDetails;
     let previewIndex = 0;
 
     $: previewIndex, update();
@@ -46,24 +46,26 @@
 
     function update() {
         const ready = Boolean(canvas?.ctx);
-        if (!ready) return;
-        if (values.file) {
-            const stories = parseCSV(values.file);
-            previewIndex = clamp(previewIndex, 0, stories.length);
-            const previewing = stories[previewIndex];
-            story = `${previewing.canonical} - ${previewing.portion} - ${previewing.title}`;
+        if (!ready || !values.file) return;
+
+        const data = parseCSV(values.file);
+        if (!data) return;
+
+        const indices = parseRange(values.rows || "");
+
+        let index;
+        if (indices && indices.length > 0) {
+            previewIndex = clamp(previewIndex, 0, indices.length - 1);
+            index = indices[previewIndex];
         } else {
-            previewIndex = Math.max(0, previewIndex);
+            previewIndex = clamp(previewIndex, 0, data.length - 1);
+            index = previewIndex;
         }
-        load().then((assets) => {
-            canvas.ctx.drawImage(
-                generate(canvas, assets, {
-                    ...values,
-                    previewIndex: previewIndex,
-                }),
-                0,
-                0,
-            );
+        const story = data[index];
+        previewDetails = `${story.canonical} - ${story.portion} - ${story.title}`;
+
+        load().then(() => {
+            generate(canvas.ctx, story, values);
         });
     }
 </script>
@@ -73,34 +75,34 @@
 </svelte:head>
 
 <Generator {title} {fields} bind:canvas bind:values>
-    <div class="flex flex-col items-center gap-4">
-        {#if story}
-            <p>{story}</p>
-        {/if}
-        <div class="flex flex-row gap-2">
+    {#if values?.file}
+        <div class="flex flex-col items-center gap-4 w-full">
+            <p>{previewDetails}</p>
+            <div class="flex flex-row gap-2">
+                <button
+                    class="btn btn-circle"
+                    on:click={() => {
+                        previewIndex--;
+                    }}><i class="bi bi-chevron-left"></i></button
+                >
+                <input
+                    type="number"
+                    class="input input-bordered w-full max-w-28"
+                    bind:value={previewIndex}
+                />
+                <button
+                    class="btn btn-circle"
+                    on:click={() => {
+                        previewIndex++;
+                    }}><i class="bi bi-chevron-right"></i></button
+                >
+            </div>
             <button
-                class="btn btn-circle"
+                class="btn btn-primary"
                 on:click={() => {
-                    previewIndex--;
-                }}><i class="bi bi-chevron-left"></i></button
-            >
-            <input
-                type="number"
-                class="input input-bordered w-full max-w-28"
-                bind:value={previewIndex}
-            />
-            <button
-                class="btn btn-circle"
-                on:click={() => {
-                    previewIndex++;
-                }}><i class="bi bi-chevron-right"></i></button
+                    download(values);
+                }}>Download ZIP</button
             >
         </div>
-        <button
-            class="btn btn-primary"
-            on:click={() => {
-                download(values);
-            }}>Download ZIP</button
-        >
-    </div>
+    {/if}
 </Generator>

@@ -1,4 +1,4 @@
-import { columnToIndex, clamp, initialFirst, initialLast, parseRange, dateToISO } from "$lib/utilities.js";
+import { columnToIndex, initialFirst, initialLast, parseRange, dateToISO } from "$lib/utilities.js";
 import { Falcos } from "./falcos.js";
 
 import JSZip from "jszip";
@@ -27,28 +27,8 @@ export async function load() {
     return assets;
 }
 
-export function generate(canvas, assets, options) {
-    const ctx = canvas.getContext("2d");
+export function generate(ctx, story, options) {
     ctx.clearRect(0, 0, WIDTH, HEIGHT);
-
-    // Do not continue if no file is provided
-    if (!options.file) return canvas;
-    const data = parseCSV(options.file);
-    // Do not continue if data is not parsed
-    if (!data) return canvas;
-
-    const indices = parseRange(options.rows || "");
-
-    let index;
-    if (indices && indices.length > 0) {
-        options.previewIndex = clamp(options.previewIndex, 0, indices.length - 1)
-        index = indices[options.previewIndex];
-
-    } else {
-        options.previewIndex = clamp(options.previewIndex, 0, data.length - 1)
-        index = options.previewIndex;
-    }
-    const story = data[index];
 
     // Format nominees
     let nominees = story.nominees;
@@ -59,8 +39,6 @@ export function generate(canvas, assets, options) {
     }
 
     ctx.drawImage(falcos.generate(story.title, nominees), 0, 0);
-
-    return canvas;
 }
 
 export function download(options) {
