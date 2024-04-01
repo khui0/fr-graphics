@@ -20,6 +20,7 @@ export class Falcos {
                 depth: 50,
                 color: "#181818",
             },
+            margin: 50,
         };
         Object.assign(this.theme, theme);
     }
@@ -62,7 +63,7 @@ export class Falcos {
             const fontSize = this.h / 6;
             ctx.font = `${fontSize}px Montserrat-SemiBold`;
             // Split text into lines
-            const lines = this.#getLines(title, this.w);
+            const lines = this.#getLines(title, this.w - (theme.margin * 2));
             const y = this.h * 0.4;
 
             for (let i = 0; i < lines.length; i++) {
@@ -84,7 +85,7 @@ export class Falcos {
             ctx.font = `${fontSize}px Montserrat-SemiBold`;
             // Split text into lines
             const names = [...new Set(nominees)].join(", ");
-            const lines = this.#getLines(names, this.w);
+            const lines = this.#getLines(names, this.w - (theme.margin * 2));
             const y = this.h * 0.75;
 
             for (let i = 0; i < lines.length; i++) {
