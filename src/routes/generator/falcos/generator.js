@@ -31,7 +31,8 @@ export async function load() {
     return assets;
 }
 
-export function generate(ctx, story, options) {
+export function generate(canvas, story, options) {
+    const ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, WIDTH, HEIGHT);
 
     // Format nominees

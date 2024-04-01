@@ -77,7 +77,7 @@
             previewDetails = `${story.canonical} - ${story.portion} - ${story.title}`;
 
             load().then(() => {
-                generate(canvas.ctx, story, values);
+                generate(canvas, story, values);
             });
         } catch (e) {}
     }
