@@ -96,3 +96,58 @@ export function createGrid(x1, y1, x2, y2, rows, cols, gap = 0, margin = 0) {
     }
     return grid;
 }
+
+export function columnToIndex(column) {
+    const letters = column.split("").reverse();
+    let total = 0;
+    for (let i = 0; i < letters.length; i++) {
+        const letter = letters[i];
+        const value = (letter.charCodeAt(0) - 65 + 1) * (26 ** i);
+        total += value;
+    }
+    return total - 1;
+}
+
+export function clamp(value, min, max) {
+    return Math.min(Math.max(value, min), max);
+}
+
+export function initialFirst(name) {
+    const parts = name.split(" ");
+    if (parts.length == 2) {
+        return `${parts[0].substring(0, 1)}. ${parts[1]}`;
+    } else {
+        return name;
+    }
+}
+
+export function initialLast(name) {
+    const parts = name.split(" ");
+    if (parts.length == 2) {
+        return `${parts[0]} ${parts[1].substring(0, 1)}.`;
+    } else {
+        return name;
+    }
+}
+
+export function parseRange(string) {
+    const ranges = string.split(",")
+        .map(item => item.trim())
+        .filter(item => /^[0-9]+-[0-9]+$/m.test(item) || /^[0-9]+$/m.test(item));
+    const indexes = [];
+    ranges.forEach(range => {
+        range = range.split("-").map(num => parseInt(num));
+        if (range.length == 2) {
+            for (let i = range[0]; i <= range[1]; i++) {
+                if (!indexes.includes(i)) {
+                    indexes.push(i);
+                }
+            }
+        } else {
+            if (!indexes.includes(range[0])) {
+                indexes.push(range[0]);
+            }
+        }
+    });
+    return indexes;
+}

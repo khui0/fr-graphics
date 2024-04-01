@@ -1,6 +1,16 @@
 <script>
     export let field;
     export let value;
+
+    function parseText(e) {
+        const input = e.target;
+        if (input.files.length == 1) {
+            const file = input.files[0];
+            file.text().then((result) => {
+                value = result;
+            });
+        }
+    }
 </script>
 
 <label class="form-control w-full max-w-xl">
@@ -10,7 +20,16 @@
         </div>
     {/if}
     {#if field.type === "string"}
-        <input type="text" class="input input-bordered" bind:value />
+        {#if field.placeholder}
+            <input
+                type="text"
+                class="input input-bordered"
+                bind:value
+                placeholder={field.placeholder}
+            />
+        {:else}
+            <input type="text" class="input input-bordered" bind:value />
+        {/if}
     {:else if field.type === "date"}
         <input type="date" class="input input-bordered" bind:value />
     {:else if field.type === "number"}
@@ -40,5 +59,20 @@
             <span class="label-text">{field.text}</span>
             <input type="checkbox" class="toggle" bind:checked={value} />
         </label>
+    {:else if field.type === "file"}
+        {#if field.accept}
+            <input
+                type="file"
+                class="file-input file-input-bordered w-full max-w-xs"
+                accept={field.accept}
+                on:change={parseText}
+            />
+        {:else}
+            <input
+                type="file"
+                class="file-input file-input-bordered w-full max-w-xs"
+                on:change={parseText}
+            />
+        {/if}
     {/if}
 </label>
