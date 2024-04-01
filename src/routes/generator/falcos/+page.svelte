@@ -1,6 +1,7 @@
 <script>
     import { onMount } from "svelte";
     import { load, generate, download, parseCSV } from "./generator.js";
+    import { clamp } from "$lib/utilities.js";
 
     import Generator from "$lib/Generator.svelte";
 
@@ -33,7 +34,7 @@
     let canvas;
     $: values, update();
 
-    let stories;
+    let story;
     let previewIndex = 0;
 
     $: previewIndex, update();
@@ -47,7 +48,12 @@
         const ready = Boolean(canvas?.ctx);
         if (!ready) return;
         if (values.file) {
-            stories = parseCSV(values.file);
+            const stories = parseCSV(values.file);
+            previewIndex = clamp(previewIndex, 0, stories.length);
+            const previewing = stories[previewIndex];
+            story = `${previewing.canonical} - ${previewing.portion} - ${previewing.title}`;
+        } else {
+            previewIndex = Math.max(0, previewIndex);
         }
         load().then((assets) => {
             canvas.ctx.drawImage(
@@ -68,7 +74,9 @@
 
 <Generator {title} {fields} bind:canvas bind:values>
     <div class="flex flex-col items-center gap-4">
-        <p>Cultural Society Ice Skating Night</p>
+        {#if story}
+            <p>{story}</p>
+        {/if}
         <div class="flex flex-row gap-2">
             <button
                 class="btn btn-circle"
