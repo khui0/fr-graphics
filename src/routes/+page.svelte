@@ -1,7 +1,7 @@
 <script>
     import { base } from "$app/paths";
 
-    const ver = __APP_VERSION__;
+    const ver = import.meta.env.PACKAGE_VERSION;
 
     let cards = [
         {

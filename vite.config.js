@@ -1,11 +1,7 @@
 import { sveltekit } from "@sveltejs/kit/vite";
 import { defineConfig } from "vite";
+import version from "vite-plugin-package-version";
 
 export default defineConfig({
-    plugins: [
-        sveltekit(),
-    ],
-    define: {
-        __APP_VERSION__: JSON.stringify(process.env.npm_package_version),
-    },
+  plugins: [sveltekit(), version()],
 });

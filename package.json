@@ -29,7 +29,8 @@
         "bootstrap-icons": "^1.11.3",
         "file-saver": "^2.0.5",
         "jszip": "^3.10.1",
-        "sanitize-filename": "^1.6.3"
+        "sanitize-filename": "^1.6.3",
+        "vite-plugin-package-version": "^1.1.0"
     },
     "optionalDependencies": {
         "@rollup/rollup-linux-x64-gnu": "^4.9.6"
