@@ -137,7 +137,7 @@ export function generate(canvas, assets, options) {
 
         // Day of the week
         ctx.textAlign = "center";
-        ctx.font = `${HEIGHT / 18}px "Montserrat-SemiBold"`;
+        ctx.font = `${Math.min(rect.w / 6, HEIGHT / 10)}px "Montserrat-SemiBold"`;
         ctx.textBaseline = "top";
         longShadow(ctx, HEIGHT / 100, () => {
           ctx.fillStyle = SHADOW_COLOR;
@@ -147,7 +147,7 @@ export function generate(canvas, assets, options) {
         ctx.fillText(day, X_CENTER, rect.y + rect.h * 0.04);
 
         // Temperature
-        ctx.font = `${HEIGHT / 8}px "Montserrat-SemiBold"`;
+        ctx.font = `${Math.min(rect.w / 3, HEIGHT / 5)}px "Montserrat-SemiBold"`;
         ctx.textBaseline = "bottom";
         longShadow(ctx, HEIGHT / 100, () => {
           ctx.fillStyle = SHADOW_COLOR;
