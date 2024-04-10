@@ -9,7 +9,7 @@ export default {
       fallback: undefined,
       precompress: false,
       strict: true,
-    })
+    }),
   },
   paths: {
     base: process.argv.includes("dev") ? "" : "/fr-graphics",

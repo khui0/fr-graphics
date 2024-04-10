@@ -9,13 +9,9 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [
-    daisyui,
-    Typography(),
-    Scrollbar(),
-  ],
+  plugins: [daisyui, Typography(), Scrollbar()],
   future: {
-    hoverOnlyWhenSupported: true
+    hoverOnlyWhenSupported: true,
   },
   daisyui: {
     themes: [
@@ -41,8 +37,8 @@ export default {
           "--border-btn": "1px",
           "--tab-border": "1px",
           "--tab-radius": "0.5rem",
-        }
-      }]
-  }
-}
-
+        },
+      },
+    ],
+  },
+};

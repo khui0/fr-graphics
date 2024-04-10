@@ -6,5 +6,5 @@ html,
 body,
 #app,
 main {
-    @apply h-full
+  @apply h-full;
 }
