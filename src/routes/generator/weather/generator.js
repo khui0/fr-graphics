@@ -10,6 +10,11 @@ import rain from "$lib/assets/weather/rain.png";
 import snow from "$lib/assets/weather/snow.png";
 import sunny from "$lib/assets/weather/sunny.png";
 import thunder from "$lib/assets/weather/thunder.png";
+import mostlyCloudy from "$lib/assets/weather/mostly-cloudy.png";
+import mostlySunny from "$lib/assets/weather/mostly-sunny.png";
+import showers from "$lib/assets/weather/showers.png";
+import sunShowers from "$lib/assets/weather/sun-showers.png";
+import lightShowers from "$lib/assets/weather/light-showers.png";
 
 const WIDTH = 1920;
 const HEIGHT = 1080;
@@ -45,6 +50,21 @@ export async function load() {
     loadImage(thunder).then((img) => {
       assets.thunder = img;
     }),
+    loadImage(mostlyCloudy).then((img) => {
+      assets.mostlyCloudy = img;
+    }),
+    loadImage(mostlySunny).then((img) => {
+      assets.mostlySunny = img;
+    }),
+    loadImage(showers).then((img) => {
+      assets.showers = img;
+    }),
+    loadImage(sunShowers).then((img) => {
+      assets.sunShowers = img;
+    }),
+    loadImage(lightShowers).then((img) => {
+      assets.lightShowers = img;
+    }),
   ];
   await Promise.all(promises);
   return assets;
@@ -56,6 +76,8 @@ export function generate(canvas, assets, options) {
 
   // Background image
   ctx.drawImage(assets.background, 0, 0, WIDTH, HEIGHT);
+
+  console.log(options);
 
   // Title
   (() => {
@@ -127,13 +149,22 @@ export function generate(canvas, assets, options) {
         const data = options[`day${index}`];
 
         const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        const day = days[(index + options.startDay) % days.length];
+        let day = days[(index + options.startDay) % days.length];
         const temp = data.temperature + "°";
         const icon = assets[data.conditions];
         const iconSize = rows > 1 ? rect.h * 0.5 : Math.min(rect.w * 0.8, rect.h * 0.7);
 
         const X_CENTER = rect.x + rect.w / 2;
         const Y_CENTER = rect.y + rect.h / 2;
+
+        if (data.relativeDay) {
+          if (index === 0) {
+            day = "Today";
+          }
+          if (index === 1) {
+            day = "Tomorrow";
+          }
+        }
 
         // Day of the week
         ctx.textAlign = "center";

@@ -46,9 +46,7 @@
         <div
           class="w-full max-w-xl p-3 border border-neutral rounded-box my-4 first:mt-0 last:mb-0"
         >
-          {#if field.text}
-            <p class="text-neutral-content">{field.text}</p>
-          {/if}
+          <p class="text-neutral-content">{field.text}</p>
           {#each field.fields as subField}
             <Field field={subField} bind:value={values[field.name][subField.name]}></Field>
           {/each}

@@ -47,17 +47,32 @@
         type: "group",
         text: `Day ${i + 1}`,
         fields: [
+          ...(i <= 1
+            ? [
+                {
+                  name: "relativeDay",
+                  type: "toggle",
+                  text: "Relative day",
+                  value: false,
+                },
+              ]
+            : []),
           {
             name: "conditions",
             type: "select",
             text: "Conditions",
             options: [
               { value: "sunny", text: "Sunny" },
-              { value: "cloudy", text: "Cloudy" },
-              { value: "thunder", text: "Thunder" },
-              { value: "rain", text: "Rain" },
-              { value: "snow", text: "Snow" },
+              { value: "mostlySunny", text: "Mostly Sunny" },
               { value: "partlyCloudy", text: "Partly Cloudy" },
+              { value: "mostlyCloudy", text: "Mostly Cloudy" },
+              { value: "cloudy", text: "Cloudy" },
+              { value: "sunShowers", text: "Sun Showers" },
+              { value: "lightShowers", text: "Light Showers" },
+              { value: "showers", text: "Showers" },
+              { value: "rain", text: "Rain" },
+              { value: "thunder", text: "Thunder" },
+              { value: "snow", text: "Snow" },
             ],
           },
           {
